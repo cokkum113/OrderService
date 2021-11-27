@@ -19,7 +19,6 @@ public class Problem {
         Department department = new Department("computerScience", "CS-101", 100000.00);
         em1.persist(department);
         et.commit();
-
     }
 
     @Test
@@ -28,9 +27,11 @@ public class Problem {
         EntityManager em2 = emf.createEntityManager();
         EntityTransaction et2 = em2.getTransaction();
         et2.begin();
-        Department department = new Department("computerScience", "CS-101", 100000.00);
+        Department department = new Department("Testtest33", "CS-101", 100000.00);
         em2.setFlushMode(FlushModeType.COMMIT);
+
         em2.persist(department);
+
 
         List<Department> departments = em2.createQuery("select d from Department d", Department.class).getResultList();
         for(Department depart : departments){
@@ -42,7 +43,20 @@ public class Problem {
                 findDepartment.getBuilding()+ " "+
                 findDepartment.getBudget());
 
+        em2.flush();
+        et2.commit();
+
+        Department lastFind = em2.createQuery("select d from Department d where d.deptName = 'Testtest22'", Department.class).getSingleResult();
+        System.out.println(lastFind.getDeptName() + " " +
+                lastFind.getBuilding()+ " "+
+                lastFind.getBudget());
+
+
+
+
+
     }
+
 
 
 }

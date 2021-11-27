@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.DynamicUpdate
 public class Department {
 
     @Id
