@@ -1,4 +1,5 @@
 import entity.Department;
+import entity.Member;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
@@ -52,8 +53,48 @@ public class Problem {
                 lastFind.getBudget());
 
 
+    }
+
+    @Test
+    @Transactional
+    public void MemberTest()
+    {
+        String id = "1256";
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ch3");
 
 
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+
+        Member member1 = new Member();
+        member1.setId(id);
+        member1.setAge(12);
+        member1.setUserName("혜수");
+
+        Member member2 = new Member();
+        member2.setUserName("루리");
+        member2.setId(id);
+        member2.setAge(18);
+
+        System.out.println(member1);
+        System.out.println(member2);
+
+
+        em.persist(member1);
+        Member find = em.find(Member.class, id);
+        System.out.println(find+"######");
+        member1.setAge(20);
+        System.out.println(find.getAge());
+
+        em.merge(member2);
+
+        Member findMember1 = em.find(Member.class, id);
+
+        System.out.println(member1);
+        System.out.println(member2);
+        System.out.println(findMember1);
+        et.commit();
 
     }
 
