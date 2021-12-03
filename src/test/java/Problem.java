@@ -13,7 +13,6 @@ public class Problem {
     @Test
     @Transactional
     public void problem1() {
-
         EntityManager em1 = emf.createEntityManager();
         EntityTransaction et = em1.getTransaction();
         et.begin();
@@ -62,7 +61,6 @@ public class Problem {
         String id = "1256";
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ch3");
 
-
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         et.begin();
@@ -80,7 +78,6 @@ public class Problem {
         System.out.println(member1);
         System.out.println(member2);
 
-
         em.persist(member1);
         Member find = em.find(Member.class, id);
         System.out.println(find+"######");
@@ -97,7 +94,5 @@ public class Problem {
         et.commit();
 
     }
-
-
 
 }
