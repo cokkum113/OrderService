@@ -1,6 +1,6 @@
 package com.example.order;
 
-import com.example.order.Entity.Order;
+import com.example.order.Entity.Orders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,12 +29,12 @@ public class OrderController {
     }
 
     @GetMapping("/v1/find/order/{orderId}")
-    public Order findOrder(@PathVariable Long orderId){
+    public Orders findOrder(@PathVariable Long orderId){
         return orderService.findOrder(orderId);
     }
 
     @GetMapping("/v1/find/AllOrders")
-    public List<Order> findOrders(){
+    public List<Orders> findOrders(){
         return orderService.findAllOrders();
     }
 

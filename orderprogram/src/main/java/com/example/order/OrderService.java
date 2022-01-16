@@ -1,7 +1,7 @@
 package com.example.order;
 
 import com.example.order.Entity.Member;
-import com.example.order.Entity.Order;
+import com.example.order.Entity.Orders;
 import com.example.order.Entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class OrderService {
     @Transactional
     public void saveOrder(int cnt, Long productId) {
         Optional<Product> product = productRepository.findById(productId);
-        Order order = new Order().builder()
+        Orders order = new Orders().builder()
                 .product(product.get())
                 .productCnt(cnt)
                 .build();
@@ -46,13 +46,13 @@ public class OrderService {
     }
 
     @Transactional
-    public Order findOrder(Long orderId){
-        Optional<Order> order = orderRepository.findById(orderId);
+    public Orders findOrder(Long orderId){
+        Optional<Orders> order = orderRepository.findById(orderId);
         return order.get();
     }
 
     @Transactional
-    public List<Order> findAllOrders(){
+    public List<Orders> findAllOrders(){
         return orderRepository.findAll();
     }
 

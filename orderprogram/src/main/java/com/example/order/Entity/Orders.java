@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@Table(name = "order")
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
