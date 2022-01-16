@@ -35,17 +35,14 @@ public class OrderService {
     }
 
     @Transactional
-    public Long makeOrder(Long memberId, Long productId, int cnt){
-        Optional<Member> member = memberRepository.findById(memberId);
+    public void saveOrder(int cnt, Long productId) {
         Optional<Product> product = productRepository.findById(productId);
-        Order order = new Order();
-        order.setMember(member.get());
-        order.setProduct(product.get());
-        int productPrice = product.get().getPrice();
-        order.setTotal(productPrice * cnt);
+        Order order = new Order().builder()
+                .product(product.get())
+                .productCnt(cnt)
+                .build();
         orderRepository.save(order);
 
-        return order.getId();
     }
 
     @Transactional

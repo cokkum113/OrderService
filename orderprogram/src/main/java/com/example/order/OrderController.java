@@ -1,42 +1,40 @@
 package com.example.order;
 
 import com.example.order.Entity.Order;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class OrderController {
-    private OrderService orderService;
+    private final OrderService orderService;
 
-    @PostMapping("/v1/save/order/{memeberId}/{productId/{cnt}")
-    private Long saveOrder(@PathVariable Long memberId, @PathVariable Long productId, @PathVariable int cnt){
-        Long orderId = orderService.makeOrder(memberId, productId, cnt);
-        return orderId;
+    @PostMapping("/v1/save/order/{productId}/{cnt}")
+    public void saveOrder(@PathVariable Long productId,@PathVariable int cnt) {
+        orderService.saveOrder(cnt, productId);
     }
 
-    @PostMapping("v1/save/product/{productName}/{price}")
-    private Long saveProduct(@PathVariable String productName,@PathVariable int price){
+    @PostMapping("/v1/save/product/{productName}/{price}")
+    public Long saveProduct(@PathVariable String productName,@PathVariable int price){
         Long productsId = orderService.saveProduct(productName, price);
         return productsId;
     }
 
-    @PostMapping("v1/save/member/{name}")
-    private Long saveMember(@PathVariable String name){
-        Long memberId = orderService.saveMember(name);
-        return memberId;
+    @PostMapping("/v1/save/member/{name}")
+    public void saveMember(@PathVariable("name") String name){
+        orderService.saveMember(name);
+
     }
 
-    @GetMapping("v1/find/order/{orderId}")
-    private Order findOrder(@PathVariable Long orderId){
+    @GetMapping("/v1/find/order/{orderId}")
+    public Order findOrder(@PathVariable Long orderId){
         return orderService.findOrder(orderId);
     }
 
-    @GetMapping("v1/find/AllOrders")
-    private List<Order> findOrders(){
+    @GetMapping("/v1/find/AllOrders")
+    public List<Order> findOrders(){
         return orderService.findAllOrders();
     }
 
