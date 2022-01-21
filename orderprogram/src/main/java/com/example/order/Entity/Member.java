@@ -1,11 +1,11 @@
 package com.example.order.Entity;
 
+import com.example.order.dto.OrderResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +30,16 @@ public class Member {
         return new Member(name);
     }
 
-//    @OneToMany(mappedBy = "member")
-//    private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orders = new ArrayList<>();
 
+    public void addOrder(Orders order){
+        if (this.orders.contains(order)) {
+            return;
+        }
+        this.orders.add(order);
+        order.setMember(this);
+    }
 
 
 }
