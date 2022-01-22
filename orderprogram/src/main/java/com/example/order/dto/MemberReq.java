@@ -1,19 +1,18 @@
 package com.example.order.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class MemberReq {
+    @NotNull
     private String name;
 
-    @Builder
-    public MemberReq(String name) {
-        this.name = name;
-    }
+
 
 }

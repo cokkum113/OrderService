@@ -1,6 +1,5 @@
 package com.example.order;
 
-import com.example.order.Entity.Member;
 import com.example.order.Entity.Orders;
 import com.example.order.dto.*;
 import com.example.order.service.OrderService;
@@ -24,16 +23,22 @@ public class OrderController {
     }
 
     @PostMapping("/v1/member")
-    public MemberRes saveMember(@RequestBody MemberReq memberReq) {
-        MemberRes memberRes = new MemberRes();
-        memberRes.setName(memberReq.getName());
-        Long memberId = orderService.createMember(memberReq.getName());
-        memberRes.setMemberId(memberId);
-        return memberRes;
+    public MemberRes saveMember(@Valid @RequestBody MemberReq memberReq) {
+        return orderService.createMember(
+                memberReq.getName()
+        ).toResponse();
     }
 
     @PostMapping("/v1/order")
-    public void saveOrder(@RequestBody OrderRequest orderRequest) {
+    public OrderResponse saveOrder(@RequestBody OrderRequest orderRequest) {
+         Orders orders = orderService.order(orderRequest.getProductCnt(),
+                orderRequest.getProductName());
+
+        return new OrderResponse(
+                orders.getId(),
+                orders.getProduct().getProductName(),
+                orders.getProductCnt()
+        );
 
 
     }

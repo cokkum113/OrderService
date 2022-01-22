@@ -18,9 +18,9 @@ public class Orders {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "member_id")
+//    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -35,17 +35,12 @@ public class Orders {
         product.addOrder(this);
     }
 
-    public static Orders createOrder(Product product, Member member, int productCnt) {
+        public static Orders createOrder(Product product, int productCnt) {
         Orders orders = new Orders();
         orders.setProduct(product);
-        orders.setMember(member);
         orders.productCnt = productCnt;
         return orders;
+    }
 
-    }
-    public void setMember(Member member) {
-        this.member = member;
-        member.addOrder(this);
-    }
 
 }

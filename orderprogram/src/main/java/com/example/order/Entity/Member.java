@@ -30,16 +30,16 @@ public class Member {
         return new Member(name);
     }
 
-    @OneToMany(mappedBy = "member")
-    private List<Orders> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "member")
+//    private List<Orders> orders = new ArrayList<>();
 
-    public void addOrder(Orders order){
-        if (this.orders.contains(order)) {
-            return;
-        }
-        this.orders.add(order);
-        order.setMember(this);
-    }
+//    public void addOrder(Orders order){
+//        if (this.orders.contains(order)) {
+//            return;
+//        }
+//        this.orders.add(order);
+//        order.setMember(this);
+//    }
 
 
 }

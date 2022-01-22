@@ -12,9 +12,8 @@ import javax.validation.constraints.PositiveOrZero;
 @Setter
 @Builder
 public class ProductRequest {
-    @Email
+    @NotNull
     private String productName;
     @NotNull
-    @PositiveOrZero
     private Integer price;
 }
