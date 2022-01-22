@@ -37,6 +37,7 @@ public class Product {
         this.orders.add(orders);
         orders.setProduct(this);
     }
+
     public static Product createProduct(int price, String productName) {
         Product product = new Product();
         product.price = price;

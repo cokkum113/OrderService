@@ -1,12 +1,11 @@
 package com.example.order.service;
 
+import com.example.order.Entity.Member;
 import com.example.order.Entity.Orders;
 import com.example.order.Entity.Product;
 import com.example.order.MemberRepository;
 import com.example.order.OrderRepository;
 import com.example.order.ProductRepository;
-import com.example.order.model.MemberModel;
-import com.example.order.model.ProductModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,21 +21,16 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public ProductModel createProduct(String productName, int price) {
-        ProductModel product = ProductModel.createProduct(productName, price);
-
-        return ProductModel.valueOf(
-                productRepository.save(product.toEntity())
-        );
+    public Product createProduct(String productName, int price) {
+        Product product = Product.createProduct(price, productName);
+        return productRepository.save(product);
     }
 
 
     @Transactional
-    public MemberModel createMember(String name) {
-        MemberModel member = MemberModel.createMember(name);
-        return MemberModel.valueOf(
-                memberRepository.save(member.toEntity())
-        );
+    public Member createMember(String name) {
+        Member member = Member.createMember(name);
+        return memberRepository.save(member);
     }
 
     @Transactional

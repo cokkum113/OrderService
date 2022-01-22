@@ -35,12 +35,12 @@ public class Orders {
         product.addOrder(this);
     }
 
-        public static Orders createOrder(Product product, int productCnt) {
+    public static Orders createOrder(Product product, int productCnt) {
         Orders orders = new Orders();
         orders.setProduct(product);
         orders.productCnt = productCnt;
+        orders.total = (product.getPrice() * productCnt);
         return orders;
     }
-
 
 }

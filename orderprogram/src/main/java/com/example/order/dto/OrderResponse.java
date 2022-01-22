@@ -11,9 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class OrderResponse {
     private Long id;
-//    private String userName;
     private String product;
     private int productCnt;
-//    private int total;
+    private int total;
 
 }

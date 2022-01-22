@@ -1,6 +1,8 @@
 package com.example.order;
 
+import com.example.order.Entity.Member;
 import com.example.order.Entity.Orders;
+import com.example.order.Entity.Product;
 import com.example.order.dto.*;
 import com.example.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +18,23 @@ public class OrderController {
 
     @PostMapping("/v1/product")
     public ProductResponse saveProduct(@Valid @RequestBody ProductRequest productRequest) {
-        return orderService.createProduct(
+         Product product = orderService.createProduct(
                         productRequest.getProductName(),
-                        productRequest.getPrice()
-                ).toResponse();
+                        productRequest.getPrice());
+        ProductResponse productResponse = new ProductResponse();
+        productResponse.setProductId(product.getId());
+        productResponse.setProductName(product.getProductName());
+        productResponse.setPrice(product.getPrice());
+        return productResponse;
     }
 
     @PostMapping("/v1/member")
     public MemberRes saveMember(@Valid @RequestBody MemberReq memberReq) {
-        return orderService.createMember(
-                memberReq.getName()
-        ).toResponse();
+        Member member = orderService.createMember(memberReq.getName());
+        MemberRes memberRes = new MemberRes();
+        memberRes.setMemberId(member.getId());
+        memberRes.setName(member.getName());
+        return memberRes;
     }
 
     @PostMapping("/v1/order")
@@ -37,7 +45,8 @@ public class OrderController {
         return new OrderResponse(
                 orders.getId(),
                 orders.getProduct().getProductName(),
-                orders.getProductCnt()
+                orders.getProductCnt(),
+                orders.getTotal()
         );
 
 
