@@ -7,6 +7,7 @@ import com.example.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,15 +16,11 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/v1/product")
-    public ProductResponse saveProduct(@RequestBody ProductRequest productRequest) {
-        ProductResponse productResponse = new ProductResponse();
-        productResponse.setProductName(productResponse.getProductName());
-        productResponse.setPrice(productRequest.getPrice());
-
-        Long productId = orderService.createProduct(productRequest.getProductName(), productRequest.getPrice());
-        productResponse.setProductId(productId);
-
-        return productResponse;
+    public ProductResponse saveProduct(@Valid @RequestBody ProductRequest productRequest) {
+        return orderService.createProduct(
+                        productRequest.getProductName(),
+                        productRequest.getPrice()
+                ).toResponse();
     }
 
     @PostMapping("/v1/member")

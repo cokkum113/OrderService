@@ -1,8 +1,6 @@
 package com.example.order.Entity;
 
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 

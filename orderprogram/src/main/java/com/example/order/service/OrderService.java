@@ -6,6 +6,8 @@ import com.example.order.Entity.Product;
 import com.example.order.MemberRepository;
 import com.example.order.OrderRepository;
 import com.example.order.ProductRepository;
+import com.example.order.dto.ProductResponse;
+import com.example.order.model.ProductModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +23,14 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public Long createProduct(String productName, int price) {
-        Product product = Product.createProduct(price, productName);
-        productRepository.save(product);
-        return product.getId();
+    public ProductModel createProduct(String productName, int price) {
+        ProductModel product = ProductModel.createProduct(productName, price);
+
+        return ProductModel.valueOf(
+                productRepository.save(product.toEntity())
+        );
     }
+
 
     @Transactional
     public Long createMember(String name) {
@@ -38,7 +43,7 @@ public class OrderService {
     public void order(int cnt, Long productId, Long memberId) {
         Product product = productRepository.findById(productId).orElseThrow(RuntimeException::new);
         Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
-        Orders orders = Orders.createOrder(product,member,cnt);
+        Orders orders = Orders.createOrder(product, member, cnt);
         orderRepository.save(orders);
     }
 

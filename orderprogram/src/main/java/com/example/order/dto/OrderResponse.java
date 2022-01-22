@@ -12,12 +12,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class OrderResponse {
     private Long id;
+    private String name;
     private String product;
     private int productCnt;
+    private int total;
 
-    public OrderResponse(Orders order){
-        this.id = order.getId();
-        this.product = order.getProduct().getProductName();
-        this.productCnt = order.getProductCnt();
-    }
 }
